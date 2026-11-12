@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlyBrain</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪰</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://esm.sh/three@0.160.0",
+        "three/addons/": "https://esm.sh/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body class="theme-dark">
+  <div id="app">
+    
+    <!-- Drag & Drop Holographic Target Zone Overlay -->
+    <div id="universal-dropzone" class="universal-dropzone">
+      <div class="drop-target-box">
+        <div class="target-ring ring-1"></div>
+        <div class="target-ring ring-2"></div>
+        <div class="drop-icon">🧠⚡</div>
+        <div class="drop-title">UPLOAD MEDIA TO NEURAL CONNECTOME</div>
+        <div class="drop-sub">Drop any Video (MP4/WebM), Image (PNG/JPG/GIF), Audio (MP3/WAV), or Text/Code file to stream through all brain dots!</div>
+      </div>
+    </div>
+
+    <!-- Top Command Console Header Bar -->
+    <header id="lab-header">
+      <div class="header-left">
+        <div class="logo-badge">
+          <span class="pulse-dot"></span>
+          <span class="logo-title">FLYBRAIN</span>
+          <span class="badge-tag">OPTOGEN-V3</span>
+        </div>
+        <div class="specimen-tag">
+          <span class="label">SPECIMEN:</span>
+          <span class="value">D. melanogaster</span>
+          <span class="badge-sub">CANTON-S</span>
+        </div>
+      </div>
+
+      <!-- Live Seizure Equilibrium & Ictal Cascade Banner -->
+      <div id="seizure-banner" class="seizure-banner state-normal">
+        <div class="seizure-icon">⚡</div>
+        <div class="seizure-text-wrap">
+          <div class="seizure-title">STATUS: STEADY SYNAPTIC EQUILIBRIUM</div>
+          <div class="seizure-sub">EPILEPTIFORM CASCADE: <span id="seizure-pct">0%</span></div>
+        </div>
+        <div class="seizure-meter">
+          <div id="seizure-fill" class="seizure-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Fast Interventions & Sonification Toolbar -->
+      <div class="header-right">
+        <div class="drug-buttons">
+          <button id="btn-gaba" class="btn btn-drug btn-gaba" title="Inject GABA Anticonvulsant to stop seizure (Key: G)">
+            <span class="btn-icon">💉</span> GABA / Chill
+          </button>
+          <button id="btn-ptx" class="btn btn-drug btn-ptx" title="Apply PTX Picrotoxin GABA-blocker to trigger seizure (Key: P)">
+            <span class="btn-icon">🧪</span> PTX Overdrive
+          </button>
+          <button id="btn-shock" class="btn btn-drug btn-shock" title="Direct 470nm Optogenetic Laser Shock (Key: Z)">
+            <span class="btn-icon">⚡</span> Opto Shock
+          </button>
+        </div>
+
+        <button id="btn-audio-mute" class="btn btn-icon-only" title="Toggle Sonification & Audio Engine">
+          <span id="audio-icon">🔊</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Split Viewport -->
+    <main id="main-viewport">
+      
+      <!-- LEFT / CENTER: Neural Connectome & Optogenetic Matrix -->
+      <section id="brain-section" class="viewport-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="indicator-led"></span>
+            <span>NEURAL CONNECTOME & OPTOGENETIC MATRIX</span>
+            <span id="spike-rate-badge" class="stat-badge">15 Hz</span>
+          </div>
+
+          <div class="view-toggles">
+            <button id="btn-view-3d" class="btn btn-tab active">3D Connectome</button>
+            <button id="btn-view-matrix" class="btn btn-tab">Optogenetic Grid</button>
+            <button id="btn-view-synapses" class="btn btn-tab">Synaptic Flow</button>
+            <button id="btn-view-video-overlay" class="btn btn-tab">PiP Monitor</button>
+          </div>
+        </div>
+
+        <div class="canvas-container" id="brain-canvas-container">
+          <!-- Three.js Brain Canvas injected here -->
+
+          <!-- Interactive Source Media PiP Video/Audio/Bitstream Monitor -->
+          <div id="pip-video-container" class="pip-video-container">
+            <div class="pip-header">
+              <span class="pip-title">UPLINK STREAM MATRIX</span>
+              <button id="btn-pip-close" class="pip-close-btn">&times;</button>
+            </div>
+            <div class="pip-body">
+              <canvas id="video-pixel-canvas" width="160" height="120"></canvas>
+              <video id="source-video" playsinline muted loop crossorigin="anonymous"></video>
+            </div>
+            <div class="pip-stats">
+              <span id="current-stream-title">⚡ Hyper-Strobe</span>
+              <span>LUM: <span id="video-lum">0.00</span></span>
+            </div>
+          </div>
+
+          <!-- Anatomical Neuropil Markers Overlay -->
+          <div class="brain-overlay-labels">
+            <div class="region-marker mark-optic-l" style="top: 28%; left: 14%;" title="Click to stimulate Optic Lobe Left">
+              <span class="marker-dot"></span>
+              <span class="marker-txt">OPTIC MEDULLA (L)</span>
+            </div>
+            <div class="region-marker mark-optic-r" style="top: 28%; right: 14%;" title="Click to stimulate Optic Lobe Right">
+              <span class="marker-dot"></span>
+              <span class="marker-txt">OPTIC MEDULLA (R)</span>
+            </div>
+            <div class="region-marker mark-central" style="top: 46%; left: 50%; transform: translateX(-50%);" title="Click to stimulate Central Complex">
+              <span class="marker-dot"></span>
+              <span class="marker-txt">CENTRAL COMPLEX (EB/FB)</span>
+            </div>
+            <div class="region-marker mark-mushroom" style="top: 18%; left: 50%; transform: translateX(-50%);" title="Click to stimulate Mushroom Body">
+              <span class="marker-dot"></span>
+              <span class="marker-txt">MUSHROOM BODIES (KC)</span>
+            </div>
+            <div class="region-marker mark-vnc" style="bottom: 14%; left: 50%; transform: translateX(-50%);" title="Click to stimulate Motor Tract">
+              <span class="marker-dot"></span>
+              <span class="marker-txt">DESCENDING MOTOR TRACT</span>
+            </div>
+          </div>
+
+          <!-- Brain Controls HUD Dock (Bottom of Connectome) -->
+          <div class="brain-hud-controls">
+            <div class="hud-group">
+              <label>Fluorophore:</label>
+              <select id="select-fluorophore" class="select-styled">
+                <option value="gcamp">GCaMP6f (Calcium Green)</option>
+                <option value="voltage">ArcLight (Voltage Cyan)</option>
+                <option value="heat">Synaptic Heatmap (Amber)</option>
+                <option value="neon">Cyber Neon (Magenta)</option>
+                <option value="dopamine">Dopamine Lum (Gold)</option>
+              </select>
+            </div>
+
+            <div class="hud-group">
+              <label>Gain: <span id="val-lum-gain">1.5x</span></label>
+              <input type="range" id="slider-lum-gain" min="0.5" max="3.5" step="0.1" value="1.5">
+            </div>
+
+            <div class="hud-group">
+              <label>Sensitivity: <span id="val-sensitivity">High</span></label>
+              <input type="range" id="slider-sensitivity" min="0.2" max="2.5" step="0.1" value="1.4">
+            </div>
+
+            <div class="hud-group hud-actions">
+              <button id="btn-slice-mode" class="btn btn-sm btn-outline" title="Z-Depth Optical Slice Scan">Z-Slice</button>
+              <button id="btn-reset-cam-brain" class="btn btn-sm btn-outline" title="Center 3D Camera">Center</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: 3D Drosophila Specimen & Locomotion Walking Arena -->
+      <section id="fly-section" class="viewport-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="indicator-led status-fly-alive"></span>
+            <span>SPECIMEN TELEMETRY & 3D WALKING ARENA</span>
+          </div>
+          <div class="fly-mode-toggles">
+            <button id="btn-toggle-xray" class="btn btn-tab active" title="View Brain Hologram inside Head">Brain X-Ray</button>
+            <button class="btn btn-tab btn-fly-cam active" data-cam="arena">Arena</button>
+            <button class="btn btn-tab btn-fly-cam" data-cam="follow">Follow Fly</button>
+            <button class="btn btn-tab btn-fly-cam" data-cam="macro">Macro</button>
+          </div>
+        </div>
+
+        <div class="canvas-container" id="fly-canvas-container">
+          <!-- Three.js Fly Arena Canvas injected here -->
+
+          <!-- Fly Locomotion Control Bar Overlay -->
+          <div class="fly-top-control-bar">
+            <div class="walk-mode-bar">
+              <span class="bar-title">WALK MODE:</span>
+              <button id="btn-walk-roam" class="btn btn-walk-mode active" title="Fly explores arena autonomously with alternating tripod gait">
+                🪰 Free Roam
+              </button>
+              <button id="btn-walk-manual" class="btn btn-walk-mode" title="Drive fly directly using WASD or Arrow Keys">
+                🎮 WASD Drive
+              </button>
+              <button id="btn-walk-reset" class="btn btn-walk-mode" title="Reset fly to arena center">
+                🎯 Center
+              </button>
+            </div>
+
+            <div class="fly-speed-wrap">
+              <span class="speed-label">Gait Spd: <span id="val-fly-speed">1.0x</span></span>
+              <input type="range" id="slider-fly-speed" min="0.4" max="3.0" step="0.1" value="1.0">
+            </div>
+          </div>
+
+          <!-- Virtual D-Pad for manual drive -->
+          <div class="virtual-dpad" id="virtual-dpad">
+            <button id="dpad-up" class="dpad-btn dpad-up" title="Walk Forward (W)">▲</button>
+            <div class="dpad-middle">
+              <button id="dpad-left" class="dpad-btn dpad-left" title="Turn Left (A)">◀</button>
+              <div class="dpad-center">🪰</div>
+              <button id="dpad-right" class="dpad-btn dpad-right" title="Turn Right (D)">▶</button>
+            </div>
+            <button id="dpad-down" class="dpad-btn dpad-down" title="Reverse (S)">▼</button>
+          </div>
+
+          <!-- Physical Seizure & Motor Spasm Telemetry Overlay -->
+          <div class="fly-hud-overlay">
+            <div class="motor-state-box">
+              <div class="state-label">MOTOR STATE:</div>
+              <div id="fly-motor-text" class="state-value">WALKING (TRIPOD GAIT)</div>
+            </div>
+
+            <div class="fly-meters-grid">
+              <div class="mini-meter">
+                <span class="meter-label">WING FLAP: <span id="meter-wing-hz" class="meter-val">0 Hz</span></span>
+                <div class="meter-bar"><div id="bar-wing-hz" class="meter-bar-fill" style="width: 0%"></div></div>
+              </div>
+              <div class="mini-meter">
+                <span class="meter-label">STEP CADENCE: <span id="meter-step-cadence" class="meter-val">6 steps/s</span></span>
+                <div class="meter-bar"><div id="bar-step-cadence" class="meter-bar-fill" style="width: 25%"></div></div>
+              </div>
+              <div class="mini-meter">
+                <span class="meter-label">LEG TREMOR: <span id="meter-leg-tremor" class="meter-val">0%</span></span>
+                <div class="meter-bar"><div id="bar-leg-tremor" class="meter-bar-fill" style="width: 0%"></div></div>
+              </div>
+              <div class="mini-meter">
+                <span class="meter-label">SYNAPSE STORM: <span id="meter-synapse-storm" class="meter-val">0%</span></span>
+                <div class="meter-bar"><div id="bar-synapse-storm" class="meter-bar-fill" style="width: 0%"></div></div>
+              </div>
+            </div>
+
+            <!-- Seizure Warning Flasher -->
+            <div id="fly-warning-flash" class="warning-flash-overlay hidden">
+              <div class="warning-box">
+                <div class="warning-title">⚠️ EPILEPTIC TONIC-CLONIC CONVULSION ⚠️</div>
+                <div class="warning-sub">Massive hyper-synchrony across Mushroom Bodies & Motor Descending Tract</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Command Deck: Universal Brain Upload & EEG Strip -->
+    <footer id="lab-footer">
+      
+      <!-- Video / Media Stream Upload & Preset Channel Bar -->
+      <div class="video-control-strip">
+        <div class="channel-picker">
+          
+          <!-- Universal Upload Button -->
+          <label class="btn btn-upload-brain" title="Upload any Video, Image, Audio, or Data/Code file to play through all connectome dots!">
+            <span class="upload-icon">📁</span>
+            <span>Upload to Brain</span>
+            <input type="file" id="universal-file-input" accept="*/*" hidden>
+          </label>
+
+          <span id="active-source-badge" class="stat-badge hidden">Custom File</span>
+
+          <div class="channel-separator"></div>
+
+          <span class="channel-label">PRESETS:</span>
+          <div class="channel-buttons">
+            <button class="btn btn-ch" data-source="strobe">⚡ Hyper-Strobe</button>
+            <button class="btn btn-ch active" data-source="optomotor">🪰 Optomotor</button>
+            <button class="btn btn-ch" data-source="badapple">🍎 Cyber Morph</button>
+            <button class="btn btn-ch" data-source="calcium">🧬 Calcium Wave</button>
+            <button class="btn btn-ch" data-source="techno">🎵 Bass Rave</button>
+            <button class="btn btn-ch" data-source="avalanche">🧠 Avalanche</button>
+          </div>
+
+          <button id="btn-webcam" class="btn btn-outline" title="Stream live optical camera into the fly brain">
+            📹 Webcam
+          </button>
+        </div>
+
+        <!-- Playback Transport Controls -->
+        <div class="playback-controls">
+          <button id="btn-play-pause" class="btn btn-play" title="Play / Pause Stream (Spacebar)">
+            <span id="play-icon">▶</span>
+          </button>
+
+          <div class="timeline-wrap">
+            <span id="time-current" class="time-readout">00:00</span>
+            <input type="range" id="video-scrubber" min="0" max="100" step="0.1" value="0">
+            <span id="time-duration" class="time-readout">00:00</span>
+          </div>
+
+          <div class="speed-selector">
+            <span class="speed-label">SPD:</span>
+            <select id="select-speed" class="select-styled select-sm">
+              <option value="0.5">0.5x</option>
+              <option value="1.0" selected>1.0x</option>
+              <option value="1.5">1.5x</option>
+              <option value="2.0">2.0x</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Drosophila Multi-Channel EEG / LFP Oscilloscope -->
+      <div class="eeg-oscilloscope-strip">
+        <div class="eeg-sidebar">
+          <div class="eeg-header">
+            <span class="pulse-dot-green"></span>
+            <span>DROSOPHILA EEG / LFP</span>
+          </div>
+          <div class="eeg-ch-legend">
+            <div class="ch-tag ch-1"><span class="dot"></span> CH1: Optic Medulla (L)</div>
+            <div class="ch-tag ch-2"><span class="dot"></span> CH2: Optic Medulla (R)</div>
+            <div class="ch-tag ch-3"><span class="dot"></span> CH3: Central Complex (EB)</div>
+            <div class="ch-tag ch-4"><span class="dot"></span> CH4: Mushroom Body (KC)</div>
+            <div class="ch-tag ch-5"><span class="dot"></span> CH5: Motor Ventral Cord</div>
+          </div>
+        </div>
+
+        <div class="eeg-screen-wrap">
+          <canvas id="eeg-canvas" width="800" height="85"></canvas>
+          <div class="eeg-grid-overlay"></div>
+        </div>
+
+        <div class="seizure-risk-box">
+          <div class="risk-title">ICTAL PROBABILITY</div>
+          <div id="risk-rating" class="risk-value risk-low">LOW (2%)</div>
+          <div class="risk-hint" id="current-stream-detail">High contrast & strobing will induce epileptic discharge</div>
+        </div>
+      </div>
+
+    </footer>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
