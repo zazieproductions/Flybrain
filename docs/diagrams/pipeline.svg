@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 430" font-family="'JetBrains Mono', 'Courier New', monospace">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a101d"/><stop offset="1" stop-color="#05080f"/>
+    </linearGradient>
+    <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+      <path d="M0,0 L8,4.5 L0,9 Z" fill="#00f0ff"/>
+    </marker>
+  </defs>
+  <rect width="1240" height="430" fill="url(#bg2)"/>
+  <text x="620" y="36" text-anchor="middle" fill="#f1f7ff" font-size="21" font-weight="bold" letter-spacing="3">PER-FRAME NEURAL PIPELINE</text>
+  <text x="620" y="60" text-anchor="middle" fill="#94a3b8" font-size="12">one scalar — seizureIndex — couples optics, connectome, body and sound</text>
+
+  <!-- stages -->
+  <g>
+    <rect x="30" y="110" width="160" height="120" rx="10" fill="#10192a" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="110" y="136" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">1 · STIMULUS</text>
+    <text x="110" y="160" text-anchor="middle" fill="#94a3b8" font-size="10.5">procedural canvas</text>
+    <text x="110" y="178" text-anchor="middle" fill="#94a3b8" font-size="10.5">video / webcam</text>
+    <text x="110" y="196" text-anchor="middle" fill="#94a3b8" font-size="10.5">image · audio FFT</text>
+    <text x="110" y="214" text-anchor="middle" fill="#94a3b8" font-size="10.5">text bitstream</text>
+  </g>
+  <g>
+    <rect x="230" y="110" width="170" height="120" rx="10" fill="#10192a" stroke="#00f0ff" stroke-width="1.5"/>
+    <text x="315" y="136" text-anchor="middle" fill="#00f0ff" font-size="12" font-weight="bold">2 · PIXEL MATRIX</text>
+    <text x="315" y="160" text-anchor="middle" fill="#f1f7ff" font-size="13">160 × 120 RGBA</text>
+    <text x="315" y="182" text-anchor="middle" fill="#94a3b8" font-size="10.5">getImageData()</text>
+    <text x="315" y="200" text-anchor="middle" fill="#94a3b8" font-size="10.5">luminance · frame Δ</text>
+    <text x="315" y="218" text-anchor="middle" fill="#94a3b8" font-size="10.5">global flash detector</text>
+  </g>
+  <g>
+    <rect x="440" y="110" width="170" height="120" rx="10" fill="#10192a" stroke="#ff2a55" stroke-width="1.5"/>
+    <text x="525" y="136" text-anchor="middle" fill="#ff2a55" font-size="12" font-weight="bold">3 · SEIZURE INDEX</text>
+    <text x="525" y="160" text-anchor="middle" fill="#f1f7ff" font-size="13">∈ [0, 1]</text>
+    <text x="525" y="182" text-anchor="middle" fill="#94a3b8" font-size="10.5">flicker accumulator</text>
+    <text x="525" y="200" text-anchor="middle" fill="#94a3b8" font-size="10.5">× sensitivity · PTX ×2.2</text>
+    <text x="525" y="218" text-anchor="middle" fill="#94a3b8" font-size="10.5">GABA → 0.2 floor</text>
+  </g>
+  <g>
+    <rect x="650" y="110" width="180" height="120" rx="10" fill="#10192a" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="740" y="136" text-anchor="middle" fill="#00ff88" font-size="12" font-weight="bold">4 · RETINOTOPY</text>
+    <text x="740" y="160" text-anchor="middle" fill="#f1f7ff" font-size="13">6,800 neurons</text>
+    <text x="740" y="182" text-anchor="middle" fill="#94a3b8" font-size="10.5">per-neuron (u,v) lookup</text>
+    <text x="740" y="200" text-anchor="middle" fill="#94a3b8" font-size="10.5">activity EMA · epileptic wave</text>
+    <text x="740" y="218" text-anchor="middle" fill="#94a3b8" font-size="10.5">fluorophore palette map</text>
+  </g>
+  <g>
+    <rect x="870" y="110" width="160" height="120" rx="10" fill="#10192a" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="950" y="136" text-anchor="middle" fill="#00ff88" font-size="12" font-weight="bold">5 · MATRIX</text>
+    <text x="950" y="160" text-anchor="middle" fill="#f1f7ff" font-size="13">768 micro-LEDs</text>
+    <text x="950" y="182" text-anchor="middle" fill="#94a3b8" font-size="10.5">32 × 24 opto grid</text>
+    <text x="950" y="200" text-anchor="middle" fill="#94a3b8" font-size="10.5">same pixel frame</text>
+    <text x="950" y="218" text-anchor="middle" fill="#94a3b8" font-size="10.5">same seizure storm</text>
+  </g>
+  <g>
+    <rect x="1070" y="110" width="140" height="120" rx="10" fill="#10192a" stroke="#ffaa00" stroke-width="1.5"/>
+    <text x="1140" y="136" text-anchor="middle" fill="#ffaa00" font-size="12" font-weight="bold">6 · OUTPUT</text>
+    <text x="1140" y="160" text-anchor="middle" fill="#94a3b8" font-size="10.5">EEG ×5 channels</text>
+    <text x="1140" y="178" text-anchor="middle" fill="#94a3b8" font-size="10.5">fly gait + spasms</text>
+    <text x="1140" y="196" text-anchor="middle" fill="#94a3b8" font-size="10.5">buzz / alarm SFX</text>
+    <text x="1140" y="214" text-anchor="middle" fill="#94a3b8" font-size="10.5">banner + meters</text>
+  </g>
+
+  <path d="M190 170 L225 170" stroke="#00f0ff" stroke-width="2" marker-end="url(#a2)"/>
+  <path d="M400 170 L435 170" stroke="#00f0ff" stroke-width="2" marker-end="url(#a2)"/>
+  <path d="M610 170 L645 170" stroke="#00f0ff" stroke-width="2" marker-end="url(#a2)"/>
+  <path d="M830 170 L865 170" stroke="#00f0ff" stroke-width="2" marker-end="url(#a2)"/>
+  <path d="M1030 170 L1065 170" stroke="#00f0ff" stroke-width="2" marker-end="url(#a2)"/>
+
+  <!-- math strip -->
+  <rect x="30" y="270" width="1180" height="110" rx="10" fill="#0a101d" stroke="#576b84" stroke-width="1"/>
+  <text x="620" y="298" text-anchor="middle" fill="#f1f7ff" font-size="13">seizureIndex = clamp( ( 0.6·instant + 0.4·flickerEMA ) · sensitivity · 0.8 )   ·   PTX overdrive: ×2.2 + 0.5   ·   GABA: sensitivity → 0.2 for 5 s</text>
+  <text x="620" y="326" text-anchor="middle" fill="#94a3b8" font-size="12">neuron activity:  a ← 0.80·a + 0.20·(luminance·gain + audio·0.5)   ·   seizure adds  max(0, sin(42t + 6z + 4x)) · 2·index</text>
+  <text x="620" y="354" text-anchor="middle" fill="#94a3b8" font-size="12">spike rate:  12 + 35·luminance + 120·Δframe + (index &gt; 0.4 ? 280·index : 0)  Hz</text>
+</svg>

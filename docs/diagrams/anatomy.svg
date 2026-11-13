@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 640" font-family="'JetBrains Mono', 'Courier New', monospace">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a101d"/><stop offset="1" stop-color="#05080f"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#00ff88" stop-opacity="0.10"/><stop offset="1" stop-color="#00ff88" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1240" height="640" fill="url(#bg3)"/>
+  <text x="620" y="36" text-anchor="middle" fill="#f1f7ff" font-size="21" font-weight="bold" letter-spacing="3">CONNECTOME ANATOMY · 6,800 NEURONS</text>
+  <text x="620" y="60" text-anchor="middle" fill="#94a3b8" font-size="12">procedurally placed Drosophila neuropils — dorsal view, schematic</text>
+
+  <ellipse cx="430" cy="330" rx="330" ry="240" fill="url(#glow)"/>
+
+  <!-- optic lobes -->
+  <path d="M250 200 Q140 260 170 360 Q200 460 300 470 Q340 470 350 420 Q330 300 250 200 Z" fill="#00f0ff" fill-opacity="0.14" stroke="#00f0ff" stroke-width="2"/>
+  <path d="M610 200 Q720 260 690 360 Q660 460 560 470 Q520 470 510 420 Q530 300 610 200 Z" fill="#00f0ff" fill-opacity="0.14" stroke="#00f0ff" stroke-width="2"/>
+  <text x="255" y="330" text-anchor="middle" fill="#00f0ff" font-size="13" font-weight="bold">OPTIC LOBE (L)</text>
+  <text x="255" y="352" text-anchor="middle" fill="#94a3b8" font-size="11">~1,500 neurons</text>
+  <text x="605" y="330" text-anchor="middle" fill="#00f0ff" font-size="13" font-weight="bold">OPTIC LOBE (R)</text>
+  <text x="605" y="352" text-anchor="middle" fill="#94a3b8" font-size="11">~1,500 neurons</text>
+
+  <!-- mushroom bodies -->
+  <path d="M430 150 Q380 190 390 240 Q400 270 430 270 Q460 270 470 240 Q480 190 430 150 Z" fill="#ff007f" fill-opacity="0.16" stroke="#ff007f" stroke-width="2"/>
+  <text x="430" y="205" text-anchor="middle" fill="#ff007f" font-size="12" font-weight="bold">MUSHROOM</text>
+  <text x="430" y="224" text-anchor="middle" fill="#ff007f" font-size="12" font-weight="bold">BODIES</text>
+  <text x="430" y="252" text-anchor="middle" fill="#94a3b8" font-size="10.5">~1,300 KC</text>
+
+  <!-- central complex -->
+  <circle cx="430" cy="330" r="62" fill="#ffaa00" fill-opacity="0.14" stroke="#ffaa00" stroke-width="2"/>
+  <circle cx="430" cy="330" r="34" fill="none" stroke="#ffaa00" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="430" y="326" text-anchor="middle" fill="#ffaa00" font-size="12" font-weight="bold">CENTRAL</text>
+  <text x="430" y="344" text-anchor="middle" fill="#ffaa00" font-size="12" font-weight="bold">COMPLEX</text>
+  <text x="430" y="366" text-anchor="middle" fill="#94a3b8" font-size="10.5">~1,300 EB/FB</text>
+
+  <!-- motor tract -->
+  <path d="M430 392 L415 520 Q430 545 445 520 Z" fill="#ff2a55" fill-opacity="0.16" stroke="#ff2a55" stroke-width="2"/>
+  <text x="430" y="470" text-anchor="middle" fill="#ff2a55" font-size="12" font-weight="bold">DESCENDING</text>
+  <text x="430" y="488" text-anchor="middle" fill="#ff2a55" font-size="12" font-weight="bold">MOTOR TRACT</text>
+  <text x="430" y="510" text-anchor="middle" fill="#94a3b8" font-size="10.5">~1,200</text>
+
+  <!-- callouts -->
+  <g font-size="11.5" fill="#94a3b8">
+    <line x1="430" y1="150" x2="430" y2="100" stroke="#ff007f" stroke-width="1"/>
+    <text x="430" y="90" text-anchor="middle" fill="#ff007f">olfactory learning · Kenyon cells</text>
+    <line x1="255" y1="200" x2="180" y2="120" stroke="#00f0ff" stroke-width="1"/>
+    <text x="150" y="108" text-anchor="middle" fill="#00f0ff">lamina → medulla → lobula</text>
+    <line x1="605" y1="200" x2="680" y2="120" stroke="#00f0ff" stroke-width="1"/>
+    <text x="710" y="108" text-anchor="middle" fill="#00f0ff">retinotopic visual map</text>
+    <line x1="492" y1="330" x2="580" y2="330" stroke="#ffaa00" stroke-width="1"/>
+    <text x="640" y="334" fill="#ffaa00">heading · navigation</text>
+    <line x1="445" y1="500" x2="560" y2="560" stroke="#ff2a55" stroke-width="1"/>
+    <text x="620" y="578" fill="#ff2a55">VNC → legs · gait control</text>
+  </g>
+
+  <!-- legend -->
+  <rect x="830" y="120" width="370" height="400" rx="12" fill="#10192a" stroke="#576b84" stroke-width="1"/>
+  <text x="1015" y="150" text-anchor="middle" fill="#f1f7ff" font-size="13" font-weight="bold">REGION LEGEND</text>
+  <g font-size="12">
+    <circle cx="860" cy="185" r="7" fill="#00f0ff"/><text x="878" y="190" fill="#f1f7ff">Optic lobes (L+R)</text><text x="878" y="208" fill="#94a3b8" font-size="11">3,000 · visual processing · EEG CH1/CH2</text>
+    <circle cx="860" cy="245" r="7" fill="#ffaa00"/><text x="878" y="250" fill="#f1f7ff">Central complex</text><text x="878" y="268" fill="#94a3b8" font-size="11">1,300 · compass · EEG CH3</text>
+    <circle cx="860" cy="305" r="7" fill="#ff007f"/><text x="878" y="310" fill="#f1f7ff">Mushroom bodies</text><text x="878" y="328" fill="#94a3b8" font-size="11">1,300 · memory · EEG CH4</text>
+    <circle cx="860" cy="365" r="7" fill="#ff2a55"/><text x="878" y="370" fill="#f1f7ff">Descending motor</text><text x="878" y="388" fill="#94a3b8" font-size="11">1,200 · VNC · EEG CH5</text>
+  </g>
+  <line x1="855" y1="420" x2="1175" y2="420" stroke="#576b84" stroke-width="1"/>
+  <text x="1015" y="448" text-anchor="middle" fill="#94a3b8" font-size="11.5">each neuron stores (x,y,z) + (u,v)</text>
+  <text x="1015" y="468" text-anchor="middle" fill="#94a3b8" font-size="11.5">retinotopic video coordinate</text>
+  <text x="1015" y="496" text-anchor="middle" fill="#00ff88" font-size="11.5">click a region marker → 470 nm</text>
+  <text x="1015" y="514" text-anchor="middle" fill="#00ff88" font-size="11.5">optogenetic laser shock</text>
+</svg>
